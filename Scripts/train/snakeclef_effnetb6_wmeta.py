@@ -157,6 +157,9 @@ class InputSequencer(tf.keras.utils.Sequence):
 			except FileNotFoundError:
 				print("file not found")
 				continue
+			except Exception:
+				print("Image corrupt")
+				continue
 
 			# Resize
 			img_res = img.resize(self.IMG_SIZE)			
