@@ -83,6 +83,7 @@ class InputSequencer(tf.keras.utils.Sequence):
 		self.check = []
 		print(os.getcwd())
 		self.data_file = pd.read_csv(self.csv_filename)
+		print(self.data_file.columns)
 		self.data_file.head()
 		print("Classes:", max(self.data_file.class_id.unique())+1)
 		self.num_data_pts = len(self.data_file)
@@ -154,6 +155,7 @@ class InputSequencer(tf.keras.utils.Sequence):
 			try:
 				img = Image.open(os.path.join(base_path, path)).convert('RGB')
 			except FileNotFoundError:
+				print("file not found")
 				continue
 
 			# Resize
@@ -170,7 +172,7 @@ class InputSequencer(tf.keras.utils.Sequence):
 		#print(np.array(batch_images).shape)
 		return ([np.array(batch_images), np.squeeze(np.array(batch_meta))], np.array(batch_labels))
 
-data_path = os.path.join('Datasets/SnakeCLEF2022-large_size/SnakeCLEF2022-large_size')
+data_path = os.path.join('./Datasets/SnakeCLEF2022-large_size/')
 data_reader = InputSequencer(base_path=data_path)
 inps, labels = data_reader[5]
 print(inps[0])
@@ -246,7 +248,7 @@ out = new_layer2(Concatenate(axis=-1)([flatten(model.output), meta_in]))
 
 
 opt = keras.optimizers.Adam(learning_rate=1e-05)
-
+	
 model2 = Model((img_in, meta_in), out)
 model2.summary()
 model2.compile(
@@ -256,13 +258,13 @@ model2.compile(
 )
 
 #need to create weight folder
-weight_save = keras.callbacks.ModelCheckpoint('weights/weights-efficientnetb6-wmeta/weights-epoch-3_{epoch:03d}.h5', save_weights_only=True, period=1)
+weight_save = keras.callbacks.ModelCheckpoint('weights/weights-efficientnetb6-wmeta/weights-epoch-1_{epoch:03d}.h5', save_weights_only=True, period=1)
 on_epoch_end_call = keras.callbacks.LambdaCallback(on_epoch_end=data_reader.on_epoch_end())
 
 # model2.load_weights('/home/miruna/LifeCLEF/SnakeCLEF/weights/weights-efficientnetb6-wmeta/weights-epoch-2_005.h5')
 model2.fit(data_reader,
     epochs=10,
     verbose=1,
-    steps_per_epoch=1,
+    steps_per_epoch=20000,
     callbacks=[weight_save, on_epoch_end_call]
 )
