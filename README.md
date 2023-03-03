@@ -1,6 +1,6 @@
 # SnakeCLEF: Gradient Boosting for the Visual Classification of Fungi Species, 2022
 
-Scripts, figures and working notes for the participation in SnakeCLEF 2022, part of the 13th CLEF Conference, 2022.
+Scripts, figures and working notes for the participation in [SnakeCLEF 2022](https://www.imageclef.org/SnakeCLEF2022), part of the [LifeCLEF labs](https://www.imageclef.org/LifeCLEF2022) at the [13th CLEF Conference, 2022](https://clef2022.clef-initiative.eu/index.php).
 
 ## Quick Links
 
