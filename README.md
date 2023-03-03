@@ -2,6 +2,8 @@
 
 Scripts, figures and working notes for the participation in [SnakeCLEF 2022](https://www.imageclef.org/SnakeCLEF2022), part of the [LifeCLEF labs](https://www.imageclef.org/LifeCLEF2022) at the [13th CLEF Conference, 2022](https://clef2022.clef-initiative.eu/index.php).
 
+**Implementation Stack**: Python, Keras/Tensorflow, XGBoost, Scikit.
+
 ## Quick Links
 
 The following references will help in reproducing this implementation and to extend the experiments for further analyses.
